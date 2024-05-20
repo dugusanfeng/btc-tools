@@ -1,12 +1,12 @@
 const { execSync } = require('child_process');
-const { network, nodeUrl, cookiePath } = require('config')
+const { network, nodeUrl, user, password, cookiePath } = require('config')
 const { logger } = require('./utils/logger')
 const args = require('minimist')(process.argv.slice(2))
 
 
 function getWalletAsset(name) {
     try {
-        const output = execSync(`ord --cookie-file ${cookiePath} --bitcoin-rpc-url ${nodeUrl} --chain ${network} wallet --name ${name} balance`);
+        const output = execSync(`ord --cookie-file ${cookiePath} --bitcoin-rpc-url ${nodeUrl} --bitcoin-rpc-username ${user} --bitcoin-rpc-password ${password} --chain ${network} wallet --name ${name} balance`);
         const result = JSON.parse(output.toString())
         logger.info(`获取钱包${name}资产信息: ${output.toString()}`)
         console.log('钱包资产信息: ', result)

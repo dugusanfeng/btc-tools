@@ -1,5 +1,5 @@
 const { execSync } = require('child_process');
-const { network, nodeUrl, cookiePath, feeRateUrl } = require('config')
+const { network, nodeUrl, user, password, cookiePath, feeRateUrl } = require('config')
 const { logger } = require('./utils/logger')
 const { requestGet } = require('./utils/request')
 const args = require('minimist')(process.argv.slice(2))
@@ -7,7 +7,7 @@ const args = require('minimist')(process.argv.slice(2))
 
 function inscription(walletName, filePath, feeRate, receiver) {
     try {
-        let command = `ord --cookie-file ${cookiePath} --bitcoin-rpc-url ${nodeUrl} --chain ${network} wallet --name ${walletName} inscribe --fee-rate ${feeRate} --file ${filePath}`
+        let command = `ord --cookie-file ${cookiePath} --bitcoin-rpc-url ${nodeUrl} --bitcoin-rpc-username ${user} --bitcoin-rpc-password ${password} --chain ${network} wallet --name ${walletName} inscribe --fee-rate ${feeRate} --file ${filePath}`
         if (receiver) {
             command += ` --destination ${receiver}`
         }

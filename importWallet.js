@@ -2,14 +2,14 @@ const fs = require('fs');
 const { decrypt } = require('./utils/crypto')
 const { logger } = require('./utils/logger')
 const { execSync } = require('child_process');
-const { network, nodeUrl, cookiePath } = require('config')
+const { network, nodeUrl, user, password, cookiePath } = require('config')
 const inquirer = require('inquirer');
 const args = require('minimist')(process.argv.slice(2))
 
 
 function importWallet(walletName, mnemonic) {
     try {
-        const output = execSync(`echo "${mnemonic}" | ord --cookie-file ${cookiePath} --bitcoin-rpc-url ${nodeUrl} --chain ${network} wallet --name ${walletName} restore --from mnemonic`);
+        const output = execSync(`echo "${mnemonic}" | ord --cookie-file ${cookiePath} --bitcoin-rpc-url ${nodeUrl} --bitcoin-rpc-username ${user} --bitcoin-rpc-password ${password} --chain ${network} wallet --name ${walletName} restore --from mnemonic`);
         // const result = JSON.parse(output.toString())
         /*
         {
@@ -63,7 +63,7 @@ async function start()
     const password = await passInput()
     if (password && password.match(/\w{6,20}$/)) {
         const [mnemonic, error] = dec(password, filePath)
-        console.log(mnemonic, error)
+        // console.log(mnemonic, error)
         if (error) {
             console.log("助记词keystore密码错误，请重新输入")
             start()
