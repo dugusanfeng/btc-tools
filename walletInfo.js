@@ -18,7 +18,7 @@ function getWalletAsset(name) {
 
 function getWalletUnspent(name) {
     try {
-        const output = execSync(`ord --cookie-file ${cookiePath} --bitcoin-rpc-url ${nodeUrl} --chain ${network} wallet --name ${name} outputs`);
+        const output = execSync(`ord --cookie-file ${cookiePath} --bitcoin-rpc-url ${nodeUrl} --bitcoin-rpc-username ${user} --bitcoin-rpc-password ${password} --chain ${network} wallet --name ${name} outputs`);
         const result = JSON.parse(output.toString())
         logger.info(`获取钱包(${name}) unspent信息: ${output.toString()}`)
         console.log('钱包unspent信息信息: ', result)
