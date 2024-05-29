@@ -96,8 +96,8 @@ yarn mintRunes --walletName ${walletName} --runeName ${runes name} --feeRate ${�
 + 钱包资产查询(btc余额，Ordinal及runes资产展示以及unspent列表)
 
 ```shell
-yarn walletAsset --walletName ${钱包名称}
-yarn walletAsset --walletName ${钱包名称} --unspent ${是否获取钱包unspent列表，默认为false}
+yarn getWalletInfo --walletName ${钱包名称}
+yarn getWalletInfo --walletName ${钱包名称} --unspent ${是否获取钱包unspent列表，默认为false}
 ```
 
 + inscription和runes资产转移
